@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { useGetDetailQuery } from "../../redux/api";
 import Loader from "../../components/Loader";
 import Error from "../../components/Error";
@@ -8,7 +9,46 @@ import { IoIosArrowBack } from "react-icons/io";
 import ItemList from '../../components/ItemList';
 import LikeButton from "../../components/LikeButton";
 
-const Detail = () => {
+// movieDetailType: API'den dönen film detay verisini temsil eder
+type GenreType = {
+  id: number;
+  name: string;
+};
+
+type ProductionCompanyType = {
+  id: number;
+  logo_path: string | null;
+  name: string;
+  origin_country: string;
+};
+
+type LanguageType = {
+  english_name: string;
+  iso_639_1: string;
+  name: string;
+};
+
+type MovieDetailType = {
+  id: number;
+  title: string;
+  backdrop_path: string;
+  tagline: string;
+  overview: string;
+  genres: GenreType[];
+  production_companies: ProductionCompanyType[];
+  spoken_languages: LanguageType[];
+  production_countries: CountryType[];
+};
+
+type CountryType = {
+  iso_3166_1: string;
+  name: string;
+};
+
+// PropsType: Detail bileşeni için bir özellik gerekmiyor, ancak tiplerin doğru olduğundan emin olmalıyız
+type PropsType = {};  // Boş, çünkü Detail bileşeni herhangi bir prop almıyor
+
+const Detail: FC<PropsType> = () => {
   const { id } = useParams();
   const { data, isLoading, error } = useGetDetailQuery(id);
 
@@ -43,7 +83,7 @@ const Detail = () => {
 
               <div className="flex gap-3 text-gray-500">
                 {data.genres.map((genre) => (
-                  <p>{genre.name}</p>
+                  <p key={genre.id}>{genre.name}</p>
                 ))}
               </div>
             </div>
