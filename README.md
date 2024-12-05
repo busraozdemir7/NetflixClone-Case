@@ -6,6 +6,10 @@
 
 <img src="screen.gif" />
 
+### Vercel 
+
+- netflix-clone-case.vercel.app 
+
 
 ## Case
 
