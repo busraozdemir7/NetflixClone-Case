@@ -7,7 +7,10 @@ import {
 } from "../../redux/api";
 import { FC } from "react";
 
-const LikeButton: FC<{ id?: number }> = ({ id }) => {
+type PropsType =
+  { id?: number }
+
+const LikeButton: FC<PropsType> = ({ id }) => {
   const favState = useGetFavoritesQuery();
 
   const isLiked = favState.data?.results.find((i) => i.id === id);
@@ -34,7 +37,7 @@ const LikeButton: FC<{ id?: number }> = ({ id }) => {
         {isLoading ? (
           <Loader type="xs" />
         ) : isLiked ? (
-          <FaHeart />
+          <FaHeart className="text-red-500" />
         ) : (
           <FaRegHeart />
         )}

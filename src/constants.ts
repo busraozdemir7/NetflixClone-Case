@@ -1,1 +1,1 @@
-export const baseImgUrl = "https://image.tmdb.org/t/p/original";
+export const baseImgUrl = import.meta.env.VITE_BASE_IMG_URL;

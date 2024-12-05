@@ -1,8 +1,10 @@
+import { FC } from "react";
+
 type PropsType = {
   type?: "xs" | "lg";
 };
 
-const Loader = ({ type }: PropsType) => {
+const Loader: FC<PropsType> = ({ type }) => {
   return (
     <div className="w-full flex justify-center" role="status">
       <svg

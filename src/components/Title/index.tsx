@@ -1,11 +1,11 @@
 import { FC } from "react";
 
-type TitleProps = {
-  title: string;
+type PropsType = {
+  children: string;
 };
 
-const Title: FC<TitleProps> = ({ title }) => {
-  return <h1 className="text-xl font-bold">{title}</h1>;
+const Title: FC<PropsType> = ({ children }) => {
+  return <h1 className="text-xl font-bold mb-5">{children}</h1>;
 };
 
 export default Title;

@@ -2,43 +2,43 @@ import {
   createApi,
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query/react";
-import { detailType, bodyType, resType } from "../types";
+import { DetailType, BodyType, ResType } from "../types";
 
 export const api = createApi({
   reducerPath: "api",
 
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.themoviedb.org/3",
+    baseUrl: import.meta.env.VITE_API_BASE_URL,
     headers: {
       accept: "application/json",
       "content-type": "application/json",
       Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMzFhYTVmNTkwMjBlM2JlODJlNGZkOTA2MGM2ZTYzNiIsInN1YiI6IjY0NzQ5OTM5OTQwOGVjMDBjMjhmYTU0MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KKe2uazo7iAtiZVbMS4VQ2mhnm32Kx7p1q6IiVwkdbw",
+        `Bearer ${import.meta.env.VITE_JWT_TOKEN}`,
     },
   }),
 
   tagTypes: ["Movies", "Favorites"],
 
   endpoints: (builder) => ({
-    getMovies: builder.query<resType, string>({
+    getMovies: builder.query<ResType, string>({
       query: (url) => url,
     }),
 
-    getDetail: builder.query<detailType, string | undefined>({
+    getDetail: builder.query<DetailType, string | undefined>({
       query: (id) => `/movie/${id}`,
     }),
 
-    addToFavorite: builder.mutation<string, bodyType>({
-      query: (body: bodyType) => ({
-        url: "/account/19719088/favorite",
+    addToFavorite: builder.mutation<string, BodyType>({
+      query: (body: BodyType) => ({
+        url: `/account/${import.meta.env.VITE_USER_ID}/favorite`,
         method: "POST",
         body: JSON.stringify(body),
       }),
       invalidatesTags: ["Favorites"],
     }),
 
-    getFavorites: builder.query<resType, void>({
-      query: () => "/account/19719088/favorite/movies",
+    getFavorites: builder.query<ResType, void>({
+      query: () => `/account/${import.meta.env.VITE_USER_ID}/favorite/movies`,
       providesTags: ["Favorites"],
     }),
   }),

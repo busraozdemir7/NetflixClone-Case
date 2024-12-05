@@ -1,4 +1,4 @@
-export type movieType = {
+export type MovieType = {
   backdrop_path: string;
   id: number;
   original_title: string;
@@ -16,14 +16,14 @@ export type movieType = {
   vote_count: number;
 };
 
-export type resType = {
+export type ResType = {
   page: number;
-  results: movieType[];
+  results: MovieType[];
   total_pages: number;
   total_results: number;
 };
 
-export type detailType = {
+export type DetailType = {
   adult: boolean;
   backdrop_path: string;
   belongs_to_collection: {
@@ -72,7 +72,7 @@ export type detailType = {
   vote_count: number;
 };
 
-export type bodyType = {
+export type BodyType = {
   media_id: number;
   media_type: string;
   favorite: boolean;
